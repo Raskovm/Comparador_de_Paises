@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Países - {{ nombre_region }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin: 0;
+        }
+        .region-selector {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .select2-container { width: 100% !important; margin-bottom: 20px; }
+        .form-container {
+            margin-top: 30px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover { background-color: #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Comparar Países - {{ nombre_region }}</h1>
+        <select class="region-selector" id="regionSelector">
+            <option value="">Cambiar región</option>
+            {% for codigo, nombre in todas_regiones.items() %}
+            <option value="{{ codigo }}" {% if codigo == region %}selected{% endif %}>{{ nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <p>Selecciona dos países para comparar:</p>
+    
+    <form action="{{ url_for('comparar_paises') }}" method="GET" class="form-container">
+        <input type="hidden" name="region" value="{{ region }}">
+        
+        {% for pais_num in [1, 2] %}
+        <label for="pais{{ pais_num }}">País {{ pais_num }}:</label>
+        <select name="pais{{ pais_num }}" id="pais{{ pais_num }}" class="js-example-basic-single" required>
+            <option value="">-- Selecciona un país --</option>
+            {% for pais in paises %}
+            <option value="{{ pais.codigo }}">
+                {{ pais.nombre }}
+            </option>
+            {% endfor %}
+        </select>
+        {% endfor %}
+        
+        <button type="submit">Comparar Países</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        document.getElementById('regionSelector').addEventListener('change', function() {
+            const region = this.value;
+            window.location.href = "{{ url_for('seleccionar_paises') }}?region=" + (region || '');
+        });
+
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+</body>
+</html>

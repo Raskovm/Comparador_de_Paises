@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparación: {{ pais1.País }} vs {{ pais2.País }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1000px; margin: 0 auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        h1 { color: #2c3e50; margin: 0; }
+        .country-header { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+        .country-container { text-align: center; }
+        .country-flag { width: 80px; height: 60px; margin: 0 15px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); object-fit: cover; }
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        tr:hover { background-color: #e6f7ff; }
+        .back-link { display: inline-block; margin-top: 20px; padding: 10px 15px; background-color: #f2f2f2; border-radius: 4px; text-decoration: none; color: #333; }
+        .back-link:hover { background-color: #ddd; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Comparación de Países</h1>
+        <a href="{{ url_for('seleccionar_paises', region=region) }}" class="back-link">Volver a {{ nombre_region }}</a>
+    </div>
+    
+    <div class="country-header">
+        <div class="country-container">
+            <img src="{{ pais1.flag_url }}" class="country-flag" onerror="this.style.display='none'">
+            <div>{{ pais1.País }}</div>
+        </div>
+        <span style="margin: 0 20px; font-size: 24px; align-self: center;">vs</span>
+        <div class="country-container">
+            <img src="{{ pais2.flag_url }}" class="country-flag" onerror="this.style.display='none'">
+            <div>{{ pais2.País }}</div>
+        </div>
+    </div>
+    
+    {{ tabla_comparativa|safe }}
+    
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="/" class="back-link">← Volver a regiones</a>
+        <a href="{{ url_for('seleccionar_paises', region=region) }}" class="back-link" style="margin-left: 10px;">Comparar otros países en {{ nombre_region }}</a>
+    </div>
+</body>
+</html>
