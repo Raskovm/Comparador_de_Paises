@@ -35,3 +35,38 @@ Antes de comenzar, asegúrate de tener los siguientes programas instalados:
 
 ```bash
 git clone https://github.com/Raskovm/comparador_de_paises.git
+```
+
+### 2. Navegar al directorio del proyecto:
+```bash
+Copiar
+cd comparador_de_paises
+```
+
+### 3. Configurar el entorno virtual:
+ ```bash
+Copiar
+python3 -m venv venv
+source venv/bin/activate  # En Windows usa: venv\Scripts\activate
+ ```
+4. Instalar las dependencias:
+
+ ```bash
+bash
+Copiar
+pip install -r requirements.txt
+ ```
+
+### 5. Instalar las dependencias:
+```bash
+Copiar
+pip install -r requirements.txt
+```
+
+### 6. Ejecutar la aplicación:
+```bash
+bash
+Copiar
+python app.py
+La aplicación se ejecutará en http://127.0.0.1:5000/ por defecto.
+ ```
