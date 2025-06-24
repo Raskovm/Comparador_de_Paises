@@ -49,7 +49,7 @@ Copiar
 python3 -m venv venv
 source venv/bin/activate  # En Windows usa: venv\Scripts\activate
  ```
-4. Instalar las dependencias:
+### 4. Instalar las dependencias:
 
  ```bash
 bash
