@@ -1,6 +1,6 @@
 # Comparador de Países
 
-![Mundo 3D](https://www.example.com/imagen.png)
+![Mundo 3D](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fes%2Filustraciones%2Fmundo-3d&psig=AOvVaw1qgz4vvyAXU_IgMsCOBDdF&ust=1750905950071000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCICdxY3Hi44DFQAAAAAdAAAAABAV/imagen.png)
 
 **Comparador de Países** es una aplicación web desarrollada en **Flask**, diseñada para facilitar la comparación de países a partir de datos provenientes de diversas fuentes globales, principalmente del **CIA World Factbook**. Esta aplicación permite comparar indicadores clave de desarrollo entre países, como el **PIB (PPA)**, **población**, **crecimiento económico**, **internet**, **alfabetización**, **tasa de desempleo**, **expectativa de vida**, y otros datos relevantes.
 
