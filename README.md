@@ -53,6 +53,10 @@ Para ejecutar este proyecto en tu máquina local, necesitarás:
 - **Docker** y **Docker Compose** (opcional para uso de contenedores).
 - **Git** para clonar el repositorio.
 
+### Explicacion
+
+Agrega 4 archivos tipo txt que explican a detalle el codigo de python y los de html.
+
 ## Instalación y Ejecución
 
 ### 1. Clonar el repositorio:
