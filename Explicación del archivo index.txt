@@ -1,0 +1,69 @@
+Este archivo HTML es la página principal del proyecto web, donde se muestra al usuario una lista de regiones disponibles para comenzar a comparar países. Está desarrollado con HTML5, CSS embebido y el motor de plantillas Jinja2 de Flask.
+
+Estructura general
+<!DOCTYPE html>
+<html lang="es">
+<head>...</head>
+<body>...</body>
+</html>
+
+<head>
+Contiene metadatos y estilos para la página:
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparador de Países</title>
+
+-Se asegura de que el texto se vea correctamente (UTF-8) y que la página sea adaptable a dispositivos móviles (viewport).
+-El título del navegador será "Comparador de Países".
+
+Estilos CSS
+
+Se definen estilos directamente en el <head> para simplificar el proyecto (sin archivos .css externos):
+
+-.region-grid: usa CSS Grid para mostrar las regiones de forma responsiva.
+-.region-card: tarjetas con borde, sombra y efecto hover.
+-.comparar-global: botón inferior que permite comparar países sin filtrar por región.
+
+Esto asegura una apariencia limpia, centrada y responsiva.
+
+<body> – Contenido de la página
+
+1. Título principal
+
+<h1>Selecciona una Región</h1>
+<p>Elige una región para comparar países:</p>
+
+-Introduce al usuario a la funcionalidad del sitio.
+
+2. Cuadrícula de regiones
+
+<div class="region-grid">
+    {% for codigo, nombre in regiones.items() %}
+        <div class="region-card">
+            <a href="{{ url_for('seleccionar_paises', region=codigo) }}">
+                <div class="region-name">{{ nombre }}</div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
+-Usa Jinja2 para recorrer el diccionario regiones que se pasa desde Flask.
+-Cada región se muestra como una tarjeta (.region-card), que es clicable (<a>) y redirige a /seleccionar-paises?region=....
+
+3. Enlace global para comparar sin filtrar
+
+<a href="{{ url_for('seleccionar_paises') }}" class="comparar-global">
+    Comparar países de cualquier región
+</a>
+
+-Si el usuario no quiere filtrar por región, puede ver todos los países disponibles con este botón.
+
+Funcionalidad con Flask
+
+Este HTML es renderizado desde el archivo app.py en la ruta /:
+
+@app.route('/')
+def home():
+    return render_template('index.html', regiones=REGIONES)
+
+-La variable regiones es enviada al template y usada en el bucle for.

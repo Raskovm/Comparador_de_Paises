@@ -1,0 +1,68 @@
+Esta página HTML permite al usuario seleccionar dos países dentro de una región específica (o de todas) para comparar sus indicadores socioeconómicos. Está diseñada con HTML5, CSS y la biblioteca JavaScript Select2 para mejorar la experiencia de los menús desplegables.
+
+1. <head> – Configuración y estilos
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparador de Países - {{ nombre_region }}</title>
+
+-Define el título dinámicamente con {{ nombre_region }}.
+-Usa la CDN de Select2, una librería que mejora los <select> con buscador y mejor apariencia.
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+Estilo CSS
+
+Define un diseño sencillo, centrado, con botones y menús estilizados:
+
+-.header: muestra el nombre de la región y un menú para cambiarla.
+-.select2-container: asegura que los selectores ocupen el ancho completo.
+-button: botón azul con efecto hover.
+
+2. <body> – Estructura y funcionalidad
+
+Cabecera
+
+<div class="header">
+    <h1>Comparar Países - {{ nombre_region }}</h1>
+    <select class="region-selector" id="regionSelector">...</select>
+</div>
+
+-Muestra el nombre de la región seleccionada.
+-El select permite cambiar de región sin tener que volver a la página de inicio.
+
+Formulario de comparación
+
+<form action="{{ url_for('comparar_paises') }}" method="GET" class="form-container">
+
+-l formulario redirige a /comparar cuando se envía.
+-Permite elegir dos países con <select> desplegables.
+
+Usa un bucle para evitar repetir código:
+
+{% for pais_num in [1, 2] %}
+  <select name="pais{{ pais_num }}" ...>
+    {% for pais in paises %}
+      <option value="{{ pais.codigo }}">{{ pais.nombre }}</option>
+    {% endfor %}
+  </select>
+{% endfor %}
+
+Script JavaScript
+
+1. Redirección al cambiar región
+
+document.getElementById('regionSelector').addEventListener('change', function() {
+    const region = this.value;
+    window.location.href = "{{ url_for('seleccionar_paises') }}?region=" + (region || '');
+});
+
+-Cuando el usuario selecciona una nueva región, la página recarga con los países correspondientes
+
+2. Activación de Select2
+
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+
+-Aplica la mejora visual a los menús desplegables.

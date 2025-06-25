@@ -1,0 +1,68 @@
+Esta página HTML presenta una tabla comparativa con los indicadores seleccionados de dos países. Es el resultado final que el usuario ve tras hacer su selección.
+
+Estructura general
+
+<!DOCTYPE html>
+<html lang="es">
+
+-Documento en español, con estructura limpia y responsiva.
+
+<head>
+
+<title>Comparación: {{ pais1.País }} vs {{ pais2.País }}</title>
+
+-El título de la pestaña del navegador muestra dinámicamente el nombre de los países comparados.
+
+Estilos
+
+Estética clara, centrada y moderna:
+
+-.header: encabezado superior con botón para regresar.
+-.country-header: sección con las banderas y nombres de los países.
+-table: tabla comparativa con estilo alternado, sombreado y hover.
+-.back-link: botones para volver a páginas anteriores.
+
+<body> – Contenido
+
+1. Encabezado principal
+<div class="header">
+    <h1>Comparación de Países</h1>
+    <a href="{{ url_for('seleccionar_paises', region=region) }}" class="back-link">Volver a {{ nombre_region }}</a>
+</div>
+
+-Muestra un título fijo y un botón para regresar a la selección de países en la misma región.
+
+2. Vista de países seleccionados
+
+<div class="country-header">
+    <div class="country-container">
+        <img src="{{ pais1.flag_url }}" ...>
+        <div>{{ pais1.País }}</div>
+    </div>
+    <span>vs</span>
+    <div class="country-container">
+        <img src="{{ pais2.flag_url }}" ...>
+        <div>{{ pais2.País }}</div>
+    </div>
+</div>
+
+-Se muestran las banderas y nombres de los países uno frente al otro con un “vs” al centro.
+-Si la imagen no carga (por ejemplo, si no hay bandera), se oculta automáticamente gracias a onerror="this.style.display='none'".
+
+3. Tabla comparativa
+
+{{ tabla_comparativa|safe }}
+
+-Se inserta dinámicamente desde Flask usando tabulate con formato HTML.
+-El filtro |safe es necesario para permitir que el HTML de la tabla se renderice correctamente (sin escapar los tags).
+
+4. Enlaces de navegación inferior
+
+<a href="/" class="back-link">← Volver a regiones</a>
+<a href="{{ url_for('seleccionar_paises', region=region) }}" class="back-link">Comparar otros países...</a>
+
+Botones que permiten:
+
+-Volver al menú principal de regiones.
+-Volver a la región actual para hacer una nueva comparación.
+
