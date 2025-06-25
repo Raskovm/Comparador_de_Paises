@@ -113,6 +113,6 @@ def comparar_paises():
     tabla_html = tabulate(tabla, headers="firstrow", tablefmt="html")
     
     return render_template('resultado.html', tabla_comparativa=tabla_html, pais1=datos_pais1, pais2=datos_pais2)
-
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=80)
+    debug = os.getenv('FLASK_DEBUG', 'False') == 'True'
+    app.run(debug=debug, host="0.0.0.0", port=80)

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      FLASK_ENV: development
+    # Remueve el volumen temporalmente para pruebas
+    # volumes:
+    #   - .:/app
+    networks:
+      - app-network
+
+  tests:
+    build: .
+    command: ["pytest", "testing/test_example.py", "-v"]
+    # working_dir: /app/testing  # Alternativa si prefieres
+    networks:
+      - app-network
+    depends_on:
+      - app
+
+networks:
+  app-network:
+    driver: bridge
