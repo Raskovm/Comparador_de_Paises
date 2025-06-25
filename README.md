@@ -59,38 +59,46 @@ Para ejecutar este proyecto en tu máquina local, necesitarás:
 
 ```bash
 git clone https://github.com/Raskovm/comparador_de_paises.git
+cd Comparador_de_Paises
 ```
 
-### 2. Navegar al directorio del proyecto:
+### 2. Crear y activar un entorno virtual (opcional)::
 ```bash
-Copiar
-cd comparador_de_paises
-```
-
-### 3. Configurar el entorno virtual:
- ```bash
-Copiar
 python3 -m venv venv
-source venv/bin/activate  # En Windows usa: venv\Scripts\activate
- ```
-### 4. Instalar las dependencias:
-
- ```bash
-bash
-Copiar
-pip install -r requirements.txt
- ```
-
-### 5. Instalar las dependencias:
-```bash
-Copiar
-pip install -r requirements.txt
+source venv/bin/activate  # En Windows: venv\Scripts\activate
 ```
 
-### 6. Ejecutar la aplicación:
-```bash
-bash
-Copiar
-python app.py
-La aplicación se ejecutará en http://127.0.0.1:5000/ por defecto.
+### 3. Instalar las dependencias::
+ ```bash
+pip install -r requirements.txt
+
  ```
+### 4. Ejecutar la aplicación:
+
+ ```bash
+python app.py
+ ```
+
+La aplicación estará disponible en http://3.148.194.62/:80 por defecto.
+
+### Uso con Docker o Docker Compose
+
+### 1. Construir la imagen Docker:
+```bash
+docker build -t comparador_paises .
+```
+
+### 2. Ejecutar la aplicación en Docker:
+```bash
+docker run -p 80:80 comparador_paises
+ ```
+### 3. Ejecutar en Docker compose:
+```bash
+docker-compose up --build -d
+ ```
+### 4. Prueba de testing:
+```bash
+docker-compose logs tests
+```
+
+### ¡Gracias por usar Comparador de Países! 
